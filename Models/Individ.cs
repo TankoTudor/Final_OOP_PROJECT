@@ -22,10 +22,9 @@ namespace Final_OOP_PROJECT.Models
         public string RePassword { get; set; }
         public DateTime DataNastere { get; set; }
 
-        public class IndividDBContext : DbContext
-         {
-           public DbSet<Individ> User { get; set; }
-         }
-
+    }
+    public class IndividDBContext : DbContext
+    {
+        public DbSet<Individ> User { get; set; }
     }
 }
