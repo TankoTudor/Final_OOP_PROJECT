@@ -175,6 +175,7 @@
     <Content Include="Views\Login.cshtml" />
     <Content Include="Views\LoginExistent\LoginExistent.cshtml" />
     <Content Include="Views\LoginExistent\Register.cshtml" />
+    <Content Include="Views\LoginExistent\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
