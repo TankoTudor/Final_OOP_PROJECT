@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Final_OOP_PROJECT.Models.Individ>
+
+@{
+    ViewBag.Title = "testAdmin";
+}
+
+<h2>testAdmin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RePassword)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNastere)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RePassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataNastere)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdUser }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdUser }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdUser })
+        </td>
+    </tr>
+}
+
+</table>
