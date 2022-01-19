@@ -15,7 +15,7 @@ namespace Final_OOP_PROJECT.Controllers
         // GET: LoginExistent
         public ActionResult LoginExistent()
         {
-            return View(iDb.User.ToList());//iDb.User.ToList()
+            return View();//iDb.User.ToList()
         }
 
 
