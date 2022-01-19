@@ -25,4 +25,5 @@ namespace Final_OOP_PROJECT.Models
     {
         public DbSet<History> Transaction { get; set; }
     }
+
 }

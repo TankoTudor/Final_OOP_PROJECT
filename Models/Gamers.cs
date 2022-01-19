@@ -20,10 +20,9 @@ namespace Final_OOP_PROJECT.Models
         public string Publisher { get; set; }
         public string Descriere { get; set; }
         public DateTime DataLansare { get; set; }
-
-        public class GamersDbContext : DbContext
-        {
-            public DbSet<Gamers> Produse { get; set; }
-        }
+    }
+    public class GamersDbContext : DbContext
+    {
+        public DbSet<Gamers> Produse { get; set; }
     }
 }
