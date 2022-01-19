@@ -10,12 +10,33 @@ namespace Final_OOP_PROJECT.Controllers
 {
     public class LoginExistentController : Controller
     {
-        private Individ.IndividDBContext iDb = new Individ.IndividDBContext();
+        private IndividDBContext iDb = new IndividDBContext();
 
         // GET: LoginExistent
-        public ActionResult Index()
+        public ActionResult LoginExistent()
         {
-            return View(iDb.User.ToList());
+            return View(iDb.User.ToList());//iDb.User.ToList()
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginExistent(Individ objUser)
+        {
+            if (ModelState.IsValid)
+            {
+                using (iDb)
+                {
+                    var obj = iDb.User.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        Session["UserID"] = obj.IdUser.ToString();
+                        Session["UserName"] = obj.Username.ToString();
+                        return RedirectToAction("UserDashBoard");
+                    }
+                }
+            }
+            return View(objUser);
         }
     }
 }
