@@ -26,5 +26,12 @@ namespace Final_OOP_PROJECT.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Your login page.";
+
+            return View();
+        }
     }
 }
