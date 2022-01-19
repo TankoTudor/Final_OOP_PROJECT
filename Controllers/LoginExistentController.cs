@@ -21,7 +21,7 @@ namespace Final_OOP_PROJECT.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LoginExistent(Individ objUser)
         {
             if (ModelState.IsValid)
@@ -29,11 +29,16 @@ namespace Final_OOP_PROJECT.Controllers
                 using (iDb)
                 {
                     var obj = iDb.User.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
-                    if (obj != null)
+                    if(obj.IdUser == 1)
+                    {
+                        return View();
+                    }                    
+                    else if (obj != null)
                     {
                         Session["UserID"] = obj.IdUser.ToString();
                         Session["UserName"] = obj.Username.ToString();
-                        return RedirectToAction("UserDashBoard");
+                        Console.WriteLine("butonul merge");
+                        //return RedirectToAction("Index");
                     }
                 }
             }
