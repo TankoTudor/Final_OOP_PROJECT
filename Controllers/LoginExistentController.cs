@@ -43,5 +43,18 @@ namespace Final_OOP_PROJECT.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Register(Individ msg)
+        {
+            if (ModelState.IsValid)
+            {
+                iDb.User.Add(msg);
+                iDb.SaveChanges();
+
+                return RedirectToAction("LoginExistent");
+            }
+            return View(msg);
+        }
     }
 }
