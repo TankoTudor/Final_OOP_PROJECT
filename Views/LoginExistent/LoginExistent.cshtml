@@ -4,5 +4,27 @@
     ViewBag.Title = "LoginExistent";
 }
 
-<h2>LoginExistent</h2>
+<h2>
+    Login Page
+</h2>
+<p>
+    @Html.ActionLink("Register", "Create")
+</p>
+
+<h3>
+    @Html.Label("Username", "Username ")
+    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+</h3>
+<h3>
+    @Html.Label("Password", "Password ")
+    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+</h3>
+
+<h2 class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Login" class="btn btn-default" />
+    </div>
+</h2>
+
+
 
