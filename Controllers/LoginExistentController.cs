@@ -38,5 +38,10 @@ namespace Final_OOP_PROJECT.Controllers
             }
             return View(objUser);
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }
