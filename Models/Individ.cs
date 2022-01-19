@@ -15,26 +15,17 @@ namespace Final_OOP_PROJECT.Models
     {
         [Key]
         public int IdUser { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public string Username { get; set; }
-
         public string Password { get; set; }
-
-
         public string RePassword { get; set; }
-
         public DateTime DataNastere { get; set; }
 
-    }
+        public class IndividDBContext : DbContext
+         {
+           public DbSet<Individ> User { get; set; }
+         }
 
-    public class IndividDBContext : DbContext
-    {
-        public DbSet<Individ> User { get; set; }
     }
-
-}
 }
