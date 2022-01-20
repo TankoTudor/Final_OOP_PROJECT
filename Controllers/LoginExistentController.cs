@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
 using Final_OOP_PROJECT.Models;
+using System.Threading.Tasks;
 
 namespace Final_OOP_PROJECT.Controllers
 {
@@ -95,6 +96,19 @@ namespace Final_OOP_PROJECT.Controllers
             return View(obj);
         }
 
+        async Task register(Individ msg)
+        {
+            await Task.Run(() =>
+            {
+                using (IndividDBContext rDb = new IndividDBContext())
+                {
+                    rDb.User.Add(msg);
+                    rDb.SaveChanges();
+
+                }
+            });
+        }
+
         public ActionResult Register()
         {
             return View();
@@ -130,10 +144,7 @@ namespace Final_OOP_PROJECT.Controllers
                             msg.RePassword = hash;
                         }
                     }
-
-                    rDb.User.Add(msg);
-                    rDb.SaveChanges();
-
+                    Task.Run(() => register(msg));
                     return RedirectToAction("LoginExistent");
                 }
             }
