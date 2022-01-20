@@ -11,7 +11,8 @@ namespace Final_OOP_PROJECT.Controllers
 {
     public class LoginExistentController : Controller
     {
-        private IndividDBContext iDb = new IndividDBContext();
+        public static int id_forever;
+        //private IndividDBContext iDb = new IndividDBContext();
 
         // GET: LoginExistent
         public ActionResult LoginExistent()
@@ -22,27 +23,46 @@ namespace Final_OOP_PROJECT.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult LoginExistent(Individ objUser)
+        public ActionResult LoginExistent(Individ obj)
         {
             if (ModelState.IsValid)
             {
-                using (iDb)
+                string Name = Request.Form["Username"].ToString();
+                string Password = Request.Form["Password"].ToString();
+
+                using (IndividDBContext iDb = new IndividDBContext())
                 {
-                    var obj = iDb.User.Where(a => a.Username.Equals(objUser.Username) && a.Password.Equals(objUser.Password)).FirstOrDefault();
-                    if(obj.IdUser == 1)
+                    var obj_ = from a in iDb.User
+                              where a.Username == Name
+                              where a.Password == Password
+                              select a;
+
+                    var res = from per in iDb.User
+                              select new
+                              {
+                                  per.IdUser,
+                                  per.LastName,
+                                  per.FirstName,
+                                  per.Username,
+                                  per.Password
+                              };
+                    foreach (var idu in res)
                     {
-                        return View();
-                    }                    
-                    else if (obj != null)
+                        id_forever = idu.IdUser;
+                        obj = iDb.User.Find(id_forever);
+                    }
+                    if (obj_.Any())
                     {
-                        Session["UserID"] = obj.IdUser.ToString();
-                        Session["UserName"] = obj.Username.ToString();
-                        Console.WriteLine("butonul merge");
-                        //return RedirectToAction("Index");
+                        if (id_forever == 1)
+                            return RedirectToAction("Admin");
+                        else
+                            return View();
                     }
                 }
+
+               
             }
-            return View(objUser);
+            return View(obj);
         }
 
         public ActionResult Register()
@@ -55,12 +75,21 @@ namespace Final_OOP_PROJECT.Controllers
         {
             if (ModelState.IsValid)
             {
-                iDb.User.Add(msg);
-                iDb.SaveChanges();
+                using (IndividDBContext rDb = new IndividDBContext())
+                {
+                    rDb.User.Add(msg);
+                    rDb.SaveChanges();
 
-                return RedirectToAction("LoginExistent");
+                    return RedirectToAction("LoginExistent");
+                }
             }
             return View(msg);
+        }
+
+        public ActionResult Admin()
+        {
+            IndividDBContext iDb = new IndividDBContext();
+            return View(iDb.User.ToList());
         }
     }
 }
