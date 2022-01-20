@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-
+using System.Xml.Serialization;
 using Final_OOP_PROJECT.Models;
 using System.Threading.Tasks;
 
@@ -34,6 +34,7 @@ namespace Final_OOP_PROJECT.Controllers
 
             if (ModelState.IsValid)
             {
+
                 string Name = Request.Form["Username"].ToString();
                 string Password = Request.Form["Password"].ToString();
 
@@ -77,6 +78,7 @@ namespace Final_OOP_PROJECT.Controllers
                                   per.Username,
                                   per.Password
                               };
+
                     foreach (var idu in res)
                     {
                         id_forever = idu.IdUser;
@@ -85,9 +87,29 @@ namespace Final_OOP_PROJECT.Controllers
                     if (obj_.Any())
                     {
                         if (id_forever == 1)
+                        {
+                            //XmlSerializer serial = new XmlSerializer(obj.GetType());
+                            //System.IO.StreamWriter w = new System.IO.StreamWriter("C: \Program Files(x86)\IIS Express\ \Users\Alex\source\repos\Final_OOP_PROJECT\Content\Files\loginchain.xml");
+                            //serial.Serialize(w,"Admin logged in at: "+DateTime.Now+" \n");
+                        
                             return RedirectToAction("Admin");
+
+                            //xml file admin logged in at datetime
+                            //string path = Server.MapPath("~/Content/Files");
+
+                            //XmlSerializer serial = new XmlSerializer(obj.GetType());
+                            //System.IO.StreamWriter w = new System.IO.StreamWriter(path +"\\.loginchain.xml");
+                            //serial.Serialize(w, obj);
+                            //w.Close();
+                        
+                            
+                        }
                         else
+                        {
                             return View();
+                            //xml file user id logged in at datetime
+
+                        }
                     }
                 }
 
