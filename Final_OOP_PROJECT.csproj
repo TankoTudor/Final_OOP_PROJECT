@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginExistentController.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,9 +176,11 @@
     <Content Include="Views\Login.cshtml" />
     <Content Include="Views\LoginExistent\LoginExistent.cshtml" />
     <Content Include="Views\LoginExistent\Register.cshtml" />
-    <Content Include="Views\LoginExistent\testAdmin.cshtml" />
-    <Content Include="Views\LoginExistent\testulvietii.cshtml" />
     <Content Include="Views\LoginExistent\Admin.cshtml" />
+    <Content Include="Views\Games\Catalog.cshtml" />
+    <Content Include="Views\Games\CatalogAdmin.cshtml" />
+    <Content Include="Views\Games\CreateGame.cshtml" />
+    <Content Include="Views\LoginExistent\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
