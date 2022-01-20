@@ -10,9 +10,10 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 
 namespace Final_OOP_PROJECT.Models
-{
+
+{   [Serializable]
     public class Individ
-    {
+    {   
         [Key]
         public int IdUser { get; set; }
         public string FirstName { get; set; }
