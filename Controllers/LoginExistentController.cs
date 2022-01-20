@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 using Final_OOP_PROJECT.Models;
 
@@ -114,12 +115,65 @@ namespace Final_OOP_PROJECT.Controllers
         {
             if (ModelState.IsValid)
             {
-                iDb2.Entry(user).State = EntityState.Deleted;
-                iDb2.SaveChanges();
-                return RedirectToAction("Admin");
-                
+                try
+                {
+                    iDb2.Entry(user).State = EntityState.Deleted;
+                    iDb2.SaveChanges();
+                    //return redirecttoaction("admin");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    iDb2.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+
+                //using (IndividDBContext iDb = new IndividDBContext())
+                //{
+                //    var res = iDb.User.SingleOrDefault(p => p.IdUser == user.IdUser);
+
+                //    if (res != null)
+                //    {
+                //        Console.WriteLine("Contul sters din DATA BASE...");
+                //        iDb.User.Remove(res);
+                //        iDb.SaveChanges();
+                //    }
+                //}
+
             }
-            
+
+            return View(user);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                //return HttpNotFound();
+                return RedirectToAction("Admin");
+
+            Individ user = iDb2.User.Find(id);
+
+            if (null == user)
+                return HttpNotFound();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Individ user)
+        {
+            if (ModelState.IsValid)
+            {
+                iDb2.Entry(user).State =
+                    System.Data.Entity.EntityState.Modified;
+                iDb2.SaveChanges();
+
+                return RedirectToAction("Admin");
+            }
+
             return View(user);
         }
     }
