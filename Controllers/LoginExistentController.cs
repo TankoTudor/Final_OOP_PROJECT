@@ -12,7 +12,7 @@ namespace Final_OOP_PROJECT.Controllers
     public class LoginExistentController : Controller
     {
         public static int id_forever;
-        //private IndividDBContext iDb = new IndividDBContext();
+        private IndividDBContext iDb2 = new IndividDBContext();
 
         // GET: LoginExistent
         public ActionResult LoginExistent()
@@ -38,6 +38,8 @@ namespace Final_OOP_PROJECT.Controllers
                               select a;
 
                     var res = from per in iDb.User
+                              where per.Username == Name
+                              where per.Password == Password
                               select new
                               {
                                   per.IdUser,
@@ -90,6 +92,35 @@ namespace Final_OOP_PROJECT.Controllers
         {
             IndividDBContext iDb = new IndividDBContext();
             return View(iDb.User.ToList());
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            //IndividDBContext iDb = new IndividDBContext();
+            if (!id.HasValue)
+                return HttpNotFound();
+            Individ user = iDb2.User.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            Console.WriteLine(id);
+            return View(user);
+        }
+
+        [HttpPost]
+
+        public ActionResult Delete(Individ user)
+        {
+            if (ModelState.IsValid)
+            {
+                iDb2.Entry(user).State = EntityState.Deleted;
+                iDb2.SaveChanges();
+                return RedirectToAction("Admin");
+                
+            }
+            
+            return View(user);
         }
     }
 }
