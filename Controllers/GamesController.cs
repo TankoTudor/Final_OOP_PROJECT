@@ -42,5 +42,34 @@ namespace Final_OOP_PROJECT.Controllers
             }
             return View(gm);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                //return HttpNotFound();
+                return RedirectToAction("CatalogAdmin");
+
+            Gamers game = gDb.Produse.Find(id);
+
+            if (null == game)
+                return HttpNotFound();
+
+            return View(game);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Gamers game)
+        {
+            if (ModelState.IsValid)
+            {
+                gDb.Entry(game).State =
+                    System.Data.Entity.EntityState.Modified;
+                gDb.SaveChanges();
+
+                return RedirectToAction("CatalogAdmin");
+            }
+
+            return View(game);
+        }
     }
 }
