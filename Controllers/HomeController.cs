@@ -14,12 +14,6 @@ namespace Final_OOP_PROJECT.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
 
         public ActionResult Contact()
         {
@@ -28,11 +22,6 @@ namespace Final_OOP_PROJECT.Controllers
             return View();
         }
 
-        /*public ActionResult Login()
-        {
-            ViewBag.Message = "Your login page.";
-
-            return View();
-        }*/
+        
     }
 }
